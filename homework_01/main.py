@@ -47,7 +47,7 @@ EVEN = is_even
 PRIME = is_prime
 
 
-def filter_numbers(*numbers, ft):
+def filter_numbers(numbers, ft):
     """
     функция, которая на вход принимает список из целых чисел,
     и возвращает только чётные/нечётные/простые числа
