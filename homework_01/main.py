@@ -28,23 +28,22 @@ def is_prime(n):
 
 
 def is_odd(n):
-    if n % 2 == 0:
-        return False
-    else:
-        return True
+    return n % 2 != 0
 
 
 def is_even(n):
-    if n % 2 == 0:
-        return True
-    else:
-        return False
+    return n % 2 == 0
 
 
 # filter types
-ODD = is_odd
-EVEN = is_even
-PRIME = is_prime
+ODD = "odd"
+EVEN = "even"
+PRIME = "prime"
+dct = {
+    "odd": is_odd,
+    "even": is_even,
+    "prime": is_prime
+}
 
 
 def filter_numbers(numbers, ft):
@@ -58,4 +57,4 @@ def filter_numbers(numbers, ft):
     >>> filter_numbers([2, 3, 4, 5], EVEN)
     <<< [2, 4]
     """
-    return list(filter(ft, numbers))
+    return list(filter(dct[ft], numbers))
