@@ -40,9 +40,9 @@ ODD = "odd"
 EVEN = "even"
 PRIME = "prime"
 dct = {
-    "odd": is_odd,
-    "even": is_even,
-    "prime": is_prime
+    ODD: is_odd,
+    EVEN: is_even,
+    PRIME: is_prime
 }
 
 
