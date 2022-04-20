@@ -18,10 +18,11 @@ from sqlalchemy.orm import sessionmaker
 from jsonplaceholder_requests import get_users, get_posts
 from aiohttp import ClientSession
 import config
-from models import User, Base, Post
+from models import User, Base, Post, PG_CONN_URI
+
 
 engine = create_async_engine(
-    config.SQLA_ASYNC_CONN_URI,
+    PG_CONN_URI,
     echo=config.SQLA_ECHO,
 )
 

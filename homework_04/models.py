@@ -8,11 +8,12 @@
 создайте связи relationship между моделями: User.posts и Post.user
 """
 
-import config
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, declared_attr
 from sqlalchemy import Column, Text, Integer, ForeignKey, String
+
+PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
 
 class Base:
 
@@ -26,7 +27,7 @@ class Base:
         return str(self)
 
 
-engine = create_async_engine(config.SQLA_ASYNC_CONN_URI, echo=True)
+engine = create_async_engine(PG_CONN_URI, echo=True)
 Base = declarative_base(bind=engine, cls=Base)
 Session = sessionmaker(engine,
                        expire_on_commit=False,
