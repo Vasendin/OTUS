@@ -7,7 +7,7 @@
 для модели Post обязательными являются user_id, title, body
 создайте связи relationship между моделями: User.posts и Post.user
 """
-
+import os
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, declared_attr
