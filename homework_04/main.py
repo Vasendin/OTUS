@@ -61,7 +61,7 @@ async def create_posts(session: AsyncSession, posts):
 
 
 async def async_main():
-    # await create_schemas()
+    await create_schemas()
     users_data, posts_data = await asyncio.gather(
         get_users(),
         get_posts(),
