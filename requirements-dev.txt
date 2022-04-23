@@ -13,5 +13,4 @@ asyncpg==0.25.0
 greenlet==1.1.2
 pg8000==1.24.2
 psycopg2-binary==2.9.3
-anyio-3.5.0
 toml==0.10.2
