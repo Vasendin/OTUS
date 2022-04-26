@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block app_content %}
+
+<script src="/static/scripts/jquery-3.6.0.js"></script>
+
+<script language=javascript>
+    var selected_row = null;
+        selected_id = null;
+        selected_name = null;
+    function select_row(row)
+    {
+      if(selected_row != null) selected_row.className = '';
+      selected_row = row;
+      if(selected_row != null) {
+        selected_row.className = 'selected';
+        selected_id = row.cells[0].innerHTML;
+        selected_name = row.cells[1].innerHTML;;
+        document.getElementById("del_id").value = selected_id;
+        document.getElementById("del_button").disabled = false;
+        document.getElementById("alert_text").innerHTML = "Удалить пользователя "+selected_name;
+      }
+    }
+    function check_hide()
+    {
+        if (selected_id == null) {
+            document.getElementById("del_button").disabled = true;
+        }
+    }
+</script>
+<style>.selected { background-color:#D3D3D3; }</style>
+<style>th {cursor: pointer;}</style>
+
+<h3 class="sub-header">Пользователи</h3>
+<div class="table-responsive">
+  <br>
+    <table class="table table-hover">
+        <thead>
+        <tr id="header">
+            <th onclick="sortTable(0)">id</th>
+            <th onclick="sortTable(1)">Username</th>
+            <th onclick="sortTable(2)">Email</th>
+        </tr>
+        </thead>
+        <tbody id="myTable">
+        {% for user in users %}
+        <tr onclick='select_row(this)'>
+            <td class="task1">{{ user.id }}</td>
+            <td class="task1">{{ user.username }}</td>
+            <td class="task1"> {{ user.email }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <!-- <INPUT TYPE=button VALUE=" Показать ID " LANGUAGE="Javascript" onclick="alert(selected_id)"> --!>
+
+    <input type="button" class="btn btn-primary" value="Добавить пользователя" onClick='location.href="{{ url_for('add_user') }}"'>
+    <button type="button" class="btn btn-danger" disabled="true" id="del_button"
+            data-toggle="modal" data-target="#exampleModal" onmousemove='check_hide()'>Удалить пользователя</button>
+</div>
+
+
+<!-- Modal window-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Удаление строки</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="alert_text">
+        Удалить пользователя?
+      </div>
+      <div class="modal-footer">
+        <form method="post" action="{{ url_for('delete_usr') }}">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+            <input type="hidden" name="del_id" id="del_id">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

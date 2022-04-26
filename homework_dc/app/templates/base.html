@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    {% if title %}{{ title }} - hw_dc{% else %}Welcome to Planer{% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+            {# application content needs to be provided in the app_content block #}
+            {% block app_content %}{% endblock %}
+    </div>
+    <!-- /div -->
+{% endblock %}

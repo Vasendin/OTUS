@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  pg:
+    image: postgres # use latest official postgres version
+    environment:
+      POSTGRES_DB: hw_dc
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+
+#  hw_dc:
+#    build:
+#      context: .
+#      dockerfile: ./Dockerfile
+#    environment:
+#      CONFIG_NAME: DevelopmentConfig
+#      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://app:password@pg/hw_dc
+#    ports:
+#      - "5000:5000"
+#    volumes:
+#      - ./:/app
+#    depends_on:
+#      - pg
+
+  hw_dc-prod:
+    build:
+      context: .
+      dockerfile: docker-build/Dockerfile
+    environment:
+      CONFIG_NAME: ProductionConfig
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://app:password@pg/hw_dc
+    ports:
+      - "5080:80"
+    depends_on:
+      - pg
+
+volumes:
+  pg-data:
