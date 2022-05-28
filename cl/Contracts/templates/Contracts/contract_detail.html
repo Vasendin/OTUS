@@ -1,0 +1,8 @@
+{% extends 'Contracts/base.html' %}
+
+{% block main_content %}
+    <a href="{% url 'contract_update' object.pk %}">update</a>
+    <p>
+        {{ object }}
+    </p>
+{% endblock %}

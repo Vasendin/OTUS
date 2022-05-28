@@ -1,0 +1,14 @@
+{% extends 'Contracts/base.html' %}
+
+{% block main_content %}
+<a href="/organizations">Организации</a>
+<h1>Contract list</h1>
+<a href="{% url 'contract_create' %}">new contract</a>
+<ul>
+    {% for el in contract_list %}
+        <li>
+            <a href="{% url 'contract_detail' el.pk %}">{{ el }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
